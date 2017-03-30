@@ -1,0 +1,141 @@
+<!-- start sauce part -->
+<div id="sauceSection">
+    <div class="col-lg-12 col-sm-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                    <span>Saus voor op de tostie <button type="button" class="btn btn-success pull-right"
+                                                         data-toggle="modal"
+                                                         data-target="#add-sauce">+</button></span>
+                <!-- Trigger the add sauce modal-->
+            </div>
+            <div class="panel-body">
+                <div class="row hidden-xs">
+                    <div class="col-lg-3 col-sm-3">
+                        <span><strong>Naam</strong></span>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <span><strong>Omschrijving</strong></span>
+                    </div>
+                    <div class="col-lg-3 col-sm-3">
+                        <span><strong>Plaats</strong></span>
+                    </div>
+                    <hr></hr>
+                </div>
+                <div class="row" ng-repeat="sauc in sauce track by $index">
+                    <div class="col-lg-3 col-sm-3">
+                        <strong class="hidden-sm hidden-md hidden-lg">Naam:</strong>
+                        <span>{{sauc.name}}</span>
+                    </div>
+                    <div class="col-lg-6 col-sm-6">
+                        <strong class="hidden-sm hidden-md hidden-lg">Omschrijving:</strong>
+                        <span>{{sauc.description}}</span>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <strong class="hidden-sm hidden-md hidden-lg">Categorie:</strong>
+                        <span>{{sauc.place}}</span>
+                    </div>
+                    <div class="col-lg-1 col-sm-1">
+
+                        <button type="button" class="btn btn-danger" ng-click="deleteSauce(sauce.name)">x
+                        </button>
+                        <button type="button" class="btn btn-info" ng-click="updateSauceInit(sauce)"><i class="fa fa-wrench" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <hr class="hidden-sm hidden-md hidden-lg">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal Add sauce -->
+    <div id="add-sauce" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form ng-submit="saveSauce()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Saus Toevoegen.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="sauce-name-input">Naam:</label>
+                            <input id="sauce-name-input" type="text" class="form-control" placeholder="Naam"
+                                   ng-model="newSauce.name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sauce-description-input">Omschrijving:</label>
+                            <input id="sauce-description-input" type="text" class="form-control"
+                                   placeholder="Omschrijving"
+                                   ng-model="newSauce.description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sauce-category-select">Categorie:</label>
+                            <select id="sauce-category-select" class="form-control"
+                                    ng-model="newSauce.category"
+                                    required>
+                                <option ng-repeat="ingSau in saucePlace track by $index" value="{{ingSau}}">
+                                    {{ingSau}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+                            <button type="submit" class="btn btn-success">Opslaan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End sauce part-->
+
+    <!-- Modal update sauce -->
+    <div id="update-sauce" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form ng-submit="updateSauce()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update Saus</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="sauce-name-update-input">Naam:</label>
+                            <input id="sauce-name-update-input" type="text" class="form-control"
+                                   placeholder="Naam"
+                                   ng-model="updateSauceElement.name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sauce-description   -update-input">Omschrijving:</label>
+                            <input id="sauce-description-update-input" type="text" class="form-control"
+                                   placeholder="Omschrijving"
+                                   ng-model="updateSaustElement.description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sauce-category-update-select">Categorie:</label>
+                            <select id="sauce-category-update-select" class="form-control"
+                                    ng-model="updateSauceElement.category"
+                                    required>
+                                <option ng-repeat="ingCat in ingredientCategory track by $index" value="{{ingCat}}">
+                                    {{ingCat}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+                            <button type="submit" class="btn btn-success">Opslaan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End ingredient part-->
+<script type="text/javascript" src="sauce.js.js"></script>

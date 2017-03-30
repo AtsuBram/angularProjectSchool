@@ -1,0 +1,163 @@
+<!-- start Tostie part -->
+<div id="tostieSection">
+    <div class="col-lg-12 col-sm-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                    <span>Tosties<button type="button" class="btn btn-success pull-right"
+                                                                 data-toggle="modal"
+                                                                 data-target="#add-tostie">+</button></span>
+                <!-- Trigger the add tostie modal-->
+            </div>
+            <div class="panel-body">
+                <div class="row hidden-xs">
+                    <div class="col-lg-3 col-sm-3">
+                        <span><strong>Naam</strong></span>
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                        <span><strong>ingredienten</strong></span>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <span><strong>sausen</strong></span>
+                    </div>
+                    <div class="col-lg-3 col-sm-3">
+                        <span><strong>seizoen</strong></span>
+                    </div>
+                    <hr>
+                </div>
+                <div class="row" ng-repeat="tostie in tosties track by $index">
+                    <div class="col-lg-3 col-sm-3">
+                        <strong class="hidden-sm hidden-md hidden-lg">Naam:</strong>
+                        <span>{{tostie.name || lowercase}}</span>
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                        <strong class="hidden-sm hidden-md hidden-lg">Ingredienten:</strong>
+                        <span>{{tostie.ingredients}}</span>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <strong class="hidden-sm hidden-md hidden-lg">Saus:</strong>
+                        <span>{{tostie.sauce}}</span>
+                    </div>
+                    <div class="col-lg-2 col-sm-2">
+                        <strong class="hidden-sm hidden-md hidden-lg">Seizoen:</strong>
+                        <span>{{tostie.season}}</span>
+                    </div>
+                    <div class="col-lg-1 col-sm-1">
+                        <button type="button" class="btn btn-danger" ng-click="deleteTostie(tostie.name)">x
+                        </button>
+                        <button type="button" class="btn btn-info" ng-click="updateTostieInit(tostie)"><i class="fa fa-wrench" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <hr class="hidden-sm hidden-md hidden-lg">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal Add tostie -->
+    <div id="add-tostie" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form ng-submit="saveNewTostie()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Tostie Toevoegen.</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="ingredient-name-input">Naam:</label>
+                            <input id="ingredient-name-input" type="text" class="form-control" placeholder="Naam"
+                                   ng-model="newTostie.name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Seizoen:</label>
+                            <div ng-repeat="season in tostieSeason track by $index" class="col-sm-12 col-lg-12">
+                                <input type="checkbox" ng-model="season.selected" value="{{season.name}}">{{season.name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>ingredienten:</label>
+                            <div ng-repeat="ingredient in ingredients track by $index" class="col-sm-12 col-lg-12">
+                                <input type="checkbox" ng-model="ingredient.selected" value="{{ingredient.name}}">{{ingredient.name}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Saus:</label>
+                            <div ng-repeat="saus in sauce track by $index" class="col-sm-12 col-lg-12">
+                                <input type="checkbox" ng-model="saus.selected" value="{{saus.name}}">{{saus.name}}
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+                            <button type="submit" class="btn btn-success">Opslaan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End ingredient part-->
+
+    <!-- Modal update Ingredient -->
+    <div id="update-ingredient" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form ng-submit="updateIngredient()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update Ingredient</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="ingredient-name-update-input">Naam:</label>
+                            <input id="ingredient-name-update-input" type="text" class="form-control"
+                                   placeholder="Naam"
+                                   ng-model="updateIngredientElement.name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ingredient-description-update-input">Omschrijving:</label>
+                            <input id="ingredient-description-update-input" type="text" class="form-control"
+                                   placeholder="Omschrijving"
+                                   ng-model="updateIngredientElement.description" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ingredient-category-update-select">Categorie:</label>
+                            <select id="ingredient-category-update-select" class="form-control"
+                                    ng-model="updateIngredientElement.category"
+                                    required>
+                                <option ng-repeat="ingCat in ingredientCategory track by $index" value="{{ingCat}}">
+                                    {{ingCat}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+                            <button type="submit" class="btn btn-success">Opslaan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--End ingredient part-->
+<script type="text/javascript">
+    $('#add-ingredient').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+
+    $('#update-ingredient').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+    $('#add-ingredient').modal('hide');
+    $('#update-ingredient').modal('hide');
+</script>

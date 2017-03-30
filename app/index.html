@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tostie-library" >
+<head>
+  <title>TostieLibrary</title>
+
+  <base href="/">
+  <link rel="stylesheet" type="text/css" href="Style/app.css">
+  <link rel="stylesheet" type="text/css" href="Style/Vendor/bootstrap.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Tostie Library</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/#">Tosties</a></li>
+        <li><a href="#ingredient">Ingredienten</a></li>
+        <li><a href="#sauce">Sauzen</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container" ng-view></div>
+
+<script src="Scripts/app.js"></script>
+  <!-- Vendor Scripts -->
+  <script src="Scripts/vendor/jquery.js"></script>
+  <script src="Scripts/vendor/bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.min.js"></script>
+  <script src="Scripts/vendor/ui-bootstrap-tpls-2.5.0.min.js"></script>
+  <!-- End Vendor Scripts -->
+<!-- Factory Scripts -->
+<script src="Scripts/Factories/ingredientFactory.js"></script>
+<script src="Scripts/Factories/sauceFactory.js"></script>
+<script src="Scripts/Factories/tostieFactory.js"></script>
+<!-- End Factory Scripts-->
+  <!-- Controller Scripts -->
+  <script src="Scripts/Controllers/ingredientController.js"></script>
+  <script src="Scripts/Controllers/sauceController.js"></script>
+<script src="Scripts/Controllers/tostieController.js"></script>
+  <!-- End Controller Scripts -->
+
+</body>
+</html>
