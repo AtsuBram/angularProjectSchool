@@ -3,7 +3,7 @@ app.factory('sauceFactory', function(){
     function getAllSauce(){
         var localSauce = JSON.parse(localStorage.getItem("sauce"));
         //Check if local ingredients existed
-        if(localSauce == undefined || localSauce.length < 0){
+        if(localSauce == undefined || localSauce.length <= 0){
             localSauce = [
                 {name:"Ketchup", description:"A sauce from tomato's", place: "Outside bread after baking"},
                 {name:"pesto", description:"A sauce from basil and parmesan", place: "On bread"},

@@ -5,9 +5,9 @@ app.factory('TostieFactory', function(){
         //Check if local ingredients existed
         if(localTosties == undefined || localTosties.length <= 0){
             localTosties = [
-                {name:"Normal", ingredients: ["Ham", "Goudse Cheese", "White bread"], sauce: ["Ketchup"], season: ["winter", "summer"]},
-                {name:"Tropical", ingredients: ["Ham", "Goudse Cheese", "Sesame white bread", "Pineapple pieces"], sauce: ["Ketchup", "butter"], season: ['summer']},
-                {name:"Oriental", ingredients: ["Ham", "Goudse Cheese", "White bread"], sauce: ["pesto"], season: ["spring"]}
+                {"name":"Normal", "ingredients": ["Ham", "Goudse Cheese", "White bread"], "sauce": ["Ketchup"], "season": ["winter", "summer"], "reviews":[]},
+                {"name":"Tropical", "ingredients": ["Ham", "Goudse Cheese", "Sesame white bread", "Pineapple pieces"], "sauce": ["Ketchup", "butter"], "season": ['summer'], "reviews":[]},
+                {"name":"Oriental", "ingredients": ["Ham", "Goudse Cheese", "White bread"], "sauce": ["pesto"], "season": ["spring"], "reviews":[]}
             ];
             localStorage.setItem("tosties", JSON.stringify(localTosties));
         }
@@ -31,11 +31,13 @@ app.factory('TostieFactory', function(){
     function saveTostie(newTostie){
         var localTostie = JSON.parse(localStorage.getItem("tosties"));
         localTostie.push({
-            name: newTostie.name,
-            ingredients: newTostie.ingredients,
-            sauce: newTostie.sauce
+            "name": newTostie.name,
+            "ingredients": newTostie.ingredients,
+            "sauce": newTostie.sauce,
+            "season": newTostie.season,
+            "reviews":[]
         });
-        localStorage.setItem("tosties", JSON.stringify(localIngredients));
+        localStorage.setItem("tosties", JSON.stringify(localTostie));
     }
 
     function updateTostie(tosties){

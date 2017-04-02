@@ -38,7 +38,7 @@
 
                         <button type="button" class="btn btn-danger" ng-click="deleteSauce(sauce.name)">x
                         </button>
-                        <button type="button" class="btn btn-info" ng-click="updateSauceInit(sauce)"><i class="fa fa-wrench" aria-hidden="true"></i>
+                        <button type="button" class="btn btn-info" ng-click="updateSauceInit(sauc)"><i class="fa fa-wrench" aria-hidden="true"></i>
                         </button>
                     </div>
                     <hr class="hidden-sm hidden-md hidden-lg">
@@ -113,14 +113,14 @@
                             <label for="sauce-description   -update-input">Omschrijving:</label>
                             <input id="sauce-description-update-input" type="text" class="form-control"
                                    placeholder="Omschrijving"
-                                   ng-model="updateSaustElement.description" required>
+                                   ng-model="updateSauceElement.description" required>
                         </div>
                         <div class="form-group">
                             <label for="sauce-category-update-select">Categorie:</label>
                             <select id="sauce-category-update-select" class="form-control"
                                     ng-model="updateSauceElement.category"
                                     required>
-                                <option ng-repeat="ingCat in ingredientCategory track by $index" value="{{ingCat}}">
+                                <option ng-repeat="ingCat in saucePlace track by $index" value="{{ingCat}}">
                                     {{ingCat}}
                                 </option>
                             </select>

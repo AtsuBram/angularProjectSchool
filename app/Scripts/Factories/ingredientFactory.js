@@ -33,9 +33,9 @@ app.factory('IngredientFactory', function(){
     function saveIngredient(newIngredient){
         var localIngredients = JSON.parse(localStorage.getItem("ingredients"));
         localIngredients.push({
-            name: newIngredient.name,
-            description: newIngredient.description,
-            category: newIngredient.category
+            "name": newIngredient.name,
+            "description": newIngredient.description,
+            "category": newIngredient.category
         });
         localStorage.setItem("ingredients", JSON.stringify(localIngredients));
     }

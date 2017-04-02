@@ -21,7 +21,7 @@ app.controller('SauceController', function($scope, sauceFactory){
     //Set sauceUpdateItem
     $scope.updateSauceInit = function(sauce){
         $scope.updateSauceElement = sauce;
-
+        console.log(sauce);
         //Get the index of the element in the array
         var updateIndex = -1;
         $scope.sauce.forEach(function(e, i) {

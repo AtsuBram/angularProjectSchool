@@ -27,21 +27,29 @@
                 <div class="row" ng-repeat="tostie in tosties track by $index">
                     <div class="col-lg-3 col-sm-3">
                         <strong class="hidden-sm hidden-md hidden-lg">Naam:</strong>
-                        <span>{{tostie.name || lowercase}}</span>
+                        <span>{{tostie.name | replaceTest}}</span>
                     </div>
-                    <div class="col-lg-4 col-sm-4">
+                    <div class="col-lg-3 col-sm-3">
                         <strong class="hidden-sm hidden-md hidden-lg">Ingredienten:</strong>
-                        <span>{{tostie.ingredients}}</span>
+                        <span>
+                        <div ng-repeat="ingredient in tostie.ingredients">
+                            {{ingredient}}
+                        </div>
+                        </span>
                     </div>
                     <div class="col-lg-2 col-sm-2">
                         <strong class="hidden-sm hidden-md hidden-lg">Saus:</strong>
-                        <span>{{tostie.sauce}}</span>
+                        <span>
+                        <dic ng-repeat="saus in tostie.sauce">{{saus}} </dic>
+                        </span>
                     </div>
                     <div class="col-lg-2 col-sm-2">
                         <strong class="hidden-sm hidden-md hidden-lg">Seizoen:</strong>
-                        <span>{{tostie.season}}</span>
+                        <span><div ng-repeat="season in tostie.season">{{season}} </div></span>
                     </div>
-                    <div class="col-lg-1 col-sm-1">
+                    <div class="col-lg-2 col-sm-2">
+                        <button type="button" class="btn btn-primary" ng-click="tostieOverview(tostie)"><i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
                         <button type="button" class="btn btn-danger" ng-click="deleteTostie(tostie.name)">x
                         </button>
                         <button type="button" class="btn btn-info" ng-click="updateTostieInit(tostie)"><i class="fa fa-wrench" aria-hidden="true"></i>
@@ -102,11 +110,11 @@
     <!--End ingredient part-->
 
     <!-- Modal update Ingredient -->
-    <div id="update-ingredient" class="modal fade" role="dialog">
+    <div id="update-tostie" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <form ng-submit="updateIngredient()">
+                <form ng-submit="updateTostie()">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Update Ingredient</h4>
@@ -116,23 +124,25 @@
                             <label for="ingredient-name-update-input">Naam:</label>
                             <input id="ingredient-name-update-input" type="text" class="form-control"
                                    placeholder="Naam"
-                                   ng-model="updateIngredientElement.name" required>
+                                   ng-model="updateTostieElement.name" required>
                         </div>
                         <div class="form-group">
-                            <label for="ingredient-description-update-input">Omschrijving:</label>
-                            <input id="ingredient-description-update-input" type="text" class="form-control"
-                                   placeholder="Omschrijving"
-                                   ng-model="updateIngredientElement.description" required>
+                            <label>Seizoen:</label>
+                            <div ng-repeat="season in tostieSeason track by $index" class="col-sm-12 col-lg-12">
+                                <input type="checkbox" ng-model="season.selected" value="{{season.name}}">{{season.name}}
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="ingredient-category-update-select">Categorie:</label>
-                            <select id="ingredient-category-update-select" class="form-control"
-                                    ng-model="updateIngredientElement.category"
-                                    required>
-                                <option ng-repeat="ingCat in ingredientCategory track by $index" value="{{ingCat}}">
-                                    {{ingCat}}
-                                </option>
-                            </select>
+                            <label>ingredienten:</label>
+                            <div ng-repeat="ingredient in ingredients track by $index" class="col-sm-12 col-lg-12">
+                                <input type="checkbox" ng-model="ingredient.selected" value="ingredients.selected">{{ingredient.name}} {{ingredient.selected}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Saus:</label>
+                            <div ng-repeat="saus in sauce track by $index" class="col-sm-12 col-lg-12">
+                                <input type="checkbox" ng-model="saus.selected" value="saus.selected">{{saus.name}}
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -145,6 +155,91 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal Overzicht Tostie -->
+<div id="preview-tostie" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{tostiePreview.name}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12 col-sm-12">
+                        Ingredienten:<br/>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        Sausen:<br>
+                    </div>
+                    Seizoenen:<br>
+
+                    <div class="col-lg-12 col-sm-12">
+                        <h4>Reviews</h4>
+                        <hr>
+                        <div id="overview-reviews">
+                            <div id="review-input">
+                                <form id="review-create" ng-submit="saveTostieReview(tostiePreview.name)">
+                                    <div class="form-group">
+                                        <input type="hidden" value="{{tostiePreview.name}}"
+                                               ng-model="newReview.tostie">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-sm-2">
+                                                <label for="review-name-update-input">Naam:</label>
+                                            </div>
+                                            <div class="col-lg-10 col-sm-10">
+                                                <input id="review-name-update-input" type="text" class="form-control"
+                                                       placeholder="Naam"
+                                                       ng-model="newReview.name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                        <div class="col-lg-2 col-sm-2">
+                                            <label for="review-message-update-input">Bericht:</label>
+                                        </div>
+                                        <div class="col-lg-10 col-sm-10">
+                                            <input id="review-message-update-input" type="text" class="form-control"
+                                                   placeholder="Bericht"
+                                                   ng-model="newReview.bericht" required>
+                                            <input type="hidden" ng-model="newReview.tostie" value="{{tostiePreview.name}}">
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-sm-2">
+                                                <label for="review-rating-update-input">Score:</label>
+                                            </div>
+                                            <div class="col-lg-10 col-sm-10">
+                                                <input id="review-rating-update-input" type="number" class="form-control"
+                                                       placeholder="Score"
+                                                       ng-model="newReview.sterren" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Opslaan</button>
+                                </form>
+                            </div>
+                            <div class="well" ng-repeat="review in tostiePreview.reviews">
+                                Reviewer: {{review.plaatser}}<br/>
+                                Bericht:<br/> {{review.bericht}}<br/>
+                                Score: {{review.Sterren}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuleren</button>
+                        <button type="submit" class="btn btn-success">Opslaan</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <!--End ingredient part-->

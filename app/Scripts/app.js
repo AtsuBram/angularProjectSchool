@@ -3,7 +3,7 @@ var app = angular.module('tostie-library', ['ngRoute','ui.bootstrap','bootstrapL
 app.config(function($routeProvider, $locationProvider) {
     //$locationProvider.html5Mode(true);
     $routeProvider
-        .when("/ingredients", {
+        .when("/ingredient", {
             templateUrl : "Views/ingredient.html",
             controller: "IngredientController"
         })

@@ -2,7 +2,7 @@ app.controller('IngredientController', function($scope, IngredientFactory){
     $scope.ingredientCategory = ["bread", "meat", "cheese", "flavoring"];
     $scope.updateIngredientElement = {id:"", name:"", description:"", category:""};
 
-    $scope.ingredients = IngredientFactory.getAllIngredients();
+    $scope.ingredients = $.map(IngredientFactory.getAllIngredients(), function(el) { return el });
 
     //saves a new ingredient
     $scope.saveNewIngredient = function(){
